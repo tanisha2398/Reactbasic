@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -51,7 +52,11 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black"
+      }
     };
 
     let persons = null;
@@ -74,6 +79,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = "red";
+      style[":hover"] = {
+        backgroundColor: "salmon",
+        color: "black"
+      };
     }
     let classes = [];
     if (this.state.persons.length <= 2) {
@@ -83,17 +92,19 @@ class App extends Component {
       classes.push("bold");
     }
     return (
-      <div className="App">
-        <h1>hi im react app</h1>
-        <p className={classes.join(" ")}>This is working</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
-          Toggle Persons
-        </button>
+      <StyleRoot>
+        <div className="App">
+          <h1>hi im react app</h1>
+          <p className={classes.join(" ")}>This is working</p>
+          <button style={style} onClick={this.togglePersonsHandler}>
+            Toggle Persons
+          </button>
 
-        {persons}
-      </div>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
