@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import withClass from "../../../higherorder/withClass";
 import classes from "./Person.css";
 import Aux from "../../../higherorder/Auxilary";
+import PropTypes from "prop-types";
 class Person extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,9 @@ class Person extends Component {
 
   componentDidMount() {
     console.log("[Person.js] inside componentDidMount()");
+    if (this.props.position === 0) {
+      this.inputElement.focus();
+    }
   }
   render() {
     console.log("[Person.js]  inside render()");
@@ -23,6 +27,9 @@ class Person extends Component {
         </p>
         <p>{this.props.children}</p>
         <input
+          ref={inp => {
+            this.inputElement = inp;
+          }}
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
@@ -31,5 +38,10 @@ class Person extends Component {
     );
   }
 }
-
+Person.propTypes = {
+  click: PropTypes.func,
+  age: PropTypes.string,
+  name: PropTypes.number,
+  changed: PropTypes.func
+};
 export default withClass(Person, classes.Person);
