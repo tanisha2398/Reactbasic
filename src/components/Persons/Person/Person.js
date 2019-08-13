@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
+import withClass from "../../../higherorder/withClass";
 import classes from "./Person.css";
+import Aux from "../../../higherorder/Auxilary";
 class Person extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +17,7 @@ class Person extends Component {
   render() {
     console.log("[Person.js]  inside render()");
     return (
-      <div className={classes.Person}>
+      <Aux>
         <p onClick={this.props.click}>
           im a person.My name is {this.props.name}.I'm {this.props.age} year old
         </p>
@@ -26,9 +27,9 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </div>
+      </Aux>
     );
   }
 }
 
-export default Person;
+export default withClass(Person, classes.Person);
